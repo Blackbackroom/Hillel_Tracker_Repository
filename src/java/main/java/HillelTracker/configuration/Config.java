@@ -1,8 +1,12 @@
-package HillelTracker.configuration;
+package main.java.HillelTracker.configuration;
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.util.Properties;
 
+
 public class Config {
+final static Logger logger=Logger.getLogger(Config.class);
 
     static {
         try{
@@ -13,7 +17,7 @@ public class Config {
             dbUser=properties.getProperty("db_user");
             dbPassword=properties.getProperty("db_password");
         }catch (IOException e){
-            e.printStackTrace();
+            logger.error("Error in configurations: "+e);
         }
     }
 

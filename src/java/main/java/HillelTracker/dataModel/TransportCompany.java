@@ -1,4 +1,6 @@
-package HillelTracker.dataModel;
+package main.java.HillelTracker.dataModel;
+
+import main.java.HillelTracker.dataModel.Invoice;
 
 import java.util.ArrayList;
 import java.util.List;

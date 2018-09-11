@@ -1,7 +1,7 @@
-package HillelTracker.persisting;
+package main.java.HillelTracker.persisting;
 
-import HillelTracker.dataModel.Invoice;
-import HillelTracker.dataModel.TransportCompany;
+import main.java.HillelTracker.dataModel.Invoice;
+import main.java.HillelTracker.dataModel.TransportCompany;
 
 public interface InvoiceRepository {
     void addInvoice(Invoice invoice);

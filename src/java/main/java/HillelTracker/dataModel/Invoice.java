@@ -1,4 +1,4 @@
-package HillelTracker.dataModel;
+package main.java.HillelTracker.dataModel;
 
 public class Invoice {
 

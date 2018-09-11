@@ -1,15 +1,17 @@
-package HillelTracker.persisting;
+package main.java.HillelTracker.persisting;
 
-import HillelTracker.dataModel.Invoice;
-import HillelTracker.dataModel.TransportCompany;
+import main.java.HillelTracker.dataModel.Invoice;
+import main.java.HillelTracker.dataModel.TransportCompany;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
 public class InvoiceDataBase implements InvoiceRepository {
 MySQLConnector mySQLConnector=new MySQLConnector();
+final static Logger logger=Logger.getLogger(InvoiceDataBase.class);
 
     //====================================================
     public void addInvoice(Invoice invoice) {
@@ -22,7 +24,7 @@ MySQLConnector mySQLConnector=new MySQLConnector();
             preparedStatement.setString(4, invoice.getStatus());
             preparedStatement.executeUpdate();
         }catch (SQLException e){
-            e.printStackTrace();
+            logger.error("Add invoice throws exception "+e);
         }
     }
     //========================================================
@@ -40,7 +42,7 @@ MySQLConnector mySQLConnector=new MySQLConnector();
             preparedStatement.setLong(2, invoice.getNumber());
             preparedStatement.executeUpdate();
         }catch (SQLException e){
-            e.printStackTrace();
+            logger.error("Delete invoice throws exception: "+e);
         }
 
     }
@@ -61,11 +63,11 @@ MySQLConnector mySQLConnector=new MySQLConnector();
                     invoice.setStatus(resultSet.getString("invoice_status"));
                 }
             }catch (SQLException e){
-                e.printStackTrace();
+                logger.error("Get invoice throws exception: "+e);
             }
 
         }catch (SQLException e){
-            e.printStackTrace();
+            logger.error("Get invoice throws exception: "+e);
         }
 
         return invoice;
@@ -79,7 +81,7 @@ MySQLConnector mySQLConnector=new MySQLConnector();
             preparedStatement.setInt(1, transportCompany.getId());
             preparedStatement.executeUpdate();
         }catch (SQLException e){
-            e.printStackTrace();
+            logger.error("Delete all invoices throws exception: "+e);
         }
     }
 

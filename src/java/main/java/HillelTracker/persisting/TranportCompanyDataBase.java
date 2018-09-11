@@ -1,8 +1,10 @@
-package HillelTracker.persisting;
+package main.java.HillelTracker.persisting;
 
-import HillelTracker.dataModel.Invoice;
-import HillelTracker.dataModel.TransportCompany;
-import HillelTracker.persisting.MySQLConnector;
+import main.java.HillelTracker.dataModel.Invoice;
+import main.java.HillelTracker.dataModel.TransportCompany;
+import main.java.HillelTracker.persisting.MySQLConnector;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +15,7 @@ import java.util.List;
 public class TranportCompanyDataBase implements TransportCompanyRepository {
     MySQLConnector mySQLConnector=new MySQLConnector();
     InvoiceDataBase invoiceDataBase=new InvoiceDataBase();
+    final static Logger logger=Logger.getLogger(TranportCompanyDataBase.class);
 
     // ======================================================================
     public void addTransportCompany(TransportCompany transportCompany) {
@@ -24,7 +27,7 @@ public class TranportCompanyDataBase implements TransportCompanyRepository {
             preparedStatement.setString(3,transportCompany.getURL());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Add transport company throws exception: "+e);
         }
 
             for (Invoice invoice:transportCompany.getInvoices()
@@ -50,7 +53,7 @@ public class TranportCompanyDataBase implements TransportCompanyRepository {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         }catch (SQLException e){
-            e.printStackTrace();
+            logger.error("Delete transport company throws exception: "+e);
         }
 
         try{Connection connection=mySQLConnector.getConnection();
@@ -58,7 +61,7 @@ public class TranportCompanyDataBase implements TransportCompanyRepository {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         }catch (SQLException e){
-            e.printStackTrace();
+            logger.error("Delete transport company throws exception: "+e);
         }
 
     }
@@ -79,11 +82,11 @@ public class TranportCompanyDataBase implements TransportCompanyRepository {
                     transportCompany.setURL(resultSet.getString("tc_url"));
                 }
             }catch (SQLException e){
-                e.printStackTrace();
+                logger.error("Get transport company throws exception: "+e);
             }
 
         }catch (SQLException e){
-            e.printStackTrace();
+            logger.error("Get transport company throws exception: "+e);
         }
 
         try {
@@ -102,11 +105,11 @@ public class TranportCompanyDataBase implements TransportCompanyRepository {
                 }
 
             }catch (SQLException e){
-                e.printStackTrace();
+                logger.error("Get transport company throws exception: "+e);
             }
 
         }catch (SQLException e){
-            e.printStackTrace();
+            logger.error("Get transport company throws exception: "+e);
         }
         transportCompany.setInvoices(invoices);
 

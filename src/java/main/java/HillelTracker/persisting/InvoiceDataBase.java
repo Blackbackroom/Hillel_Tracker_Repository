@@ -16,8 +16,8 @@ final static Logger logger=Logger.getLogger(InvoiceDataBase.class);
     //====================================================
     public void addInvoice(Invoice invoice) {
 
-        try{Connection connection=mySQLConnector.getConnection();
-            PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO `invoice` (tc_id, invoice_number, invoice_activity, invoice_status) VALUES(?,?,?,?)");
+        try(Connection connection=mySQLConnector.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO `invoice` (tc_id, invoice_number, invoice_activity, invoice_status) VALUES(?,?,?,?)")){
             preparedStatement.setInt(1, invoice.getTransportCompanyId());
             preparedStatement.setLong(2,invoice.getNumber());
             preparedStatement.setBoolean(3, invoice.getActivity());
@@ -29,15 +29,22 @@ final static Logger logger=Logger.getLogger(InvoiceDataBase.class);
     }
     //========================================================
     public void updateInvoice(Invoice invoice) {
-       deleteInvoice(invoice);
-       addInvoice(invoice);
 
+        try(Connection connection=mySQLConnector.getConnection();
+        PreparedStatement preparedStatement=connection.prepareStatement("UPDATE `invoice` SET invoice_activity=?, invoice_status=? WHERE tc_id=? AND invoice_number=?")){
+            preparedStatement.setBoolean(1, invoice.getActivity());
+            preparedStatement.setString(2, invoice.getStatus());
+            preparedStatement.setInt(3,invoice.getTransportCompanyId());
+            preparedStatement.setLong(4, invoice.getNumber());
+        }catch (SQLException e){
+            logger.error("Update invoice throws exception "+e);
+        }
     }
 
     //========================================================
     public void deleteInvoice(Invoice invoice) {
-        try{Connection connection=mySQLConnector.getConnection();
-            PreparedStatement preparedStatement=connection.prepareStatement("DELETE FROM `invoice` WHERE tc_id=?, invoice_number=?");
+        try(Connection connection=mySQLConnector.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement("DELETE FROM `invoice` WHERE tc_id=?, invoice_number=?")){
             preparedStatement.setInt(1, invoice.getTransportCompanyId());
             preparedStatement.setLong(2, invoice.getNumber());
             preparedStatement.executeUpdate();
@@ -51,11 +58,11 @@ final static Logger logger=Logger.getLogger(InvoiceDataBase.class);
     public Invoice getInvoice(int transportCompanyId, int invoiceNumber) {
         Invoice invoice=new Invoice();
 
-        try{Connection connection=mySQLConnector.getConnection();
-            PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM `invoice` WHERE tc_id=?, invoice_number=?");
+        try(Connection connection=mySQLConnector.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM `invoice` WHERE tc_id=?, invoice_number=?")){
             preparedStatement.setInt(1, transportCompanyId);
             preparedStatement.setLong(2,invoiceNumber);
-            try{ResultSet resultSet=preparedStatement.executeQuery();
+            try(ResultSet resultSet=preparedStatement.executeQuery()){
                 while (resultSet.next()){
                     invoice.setTransportCompanyId(transportCompanyId);
                     invoice.setNumber(invoiceNumber);
@@ -76,8 +83,8 @@ final static Logger logger=Logger.getLogger(InvoiceDataBase.class);
     //====================================================================
     public void deleteAllInvoicesOfTransportCompany(TransportCompany transportCompany) {
 
-        try{Connection connection=mySQLConnector.getConnection();
-            PreparedStatement preparedStatement=connection.prepareStatement("DELETE FROM `invoice` WHERE tc_id=?");
+        try(Connection connection=mySQLConnector.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement("DELETE FROM `invoice` WHERE tc_id=?")){
             preparedStatement.setInt(1, transportCompany.getId());
             preparedStatement.executeUpdate();
         }catch (SQLException e){

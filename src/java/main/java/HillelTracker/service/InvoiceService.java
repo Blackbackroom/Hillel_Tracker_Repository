@@ -11,6 +11,11 @@ public class InvoiceService {
         invoiceDataBase.addInvoice(invoice);
     }
 
+    public Invoice getInvoiceById(int transportCompanyId, int invoiceNumber){
+        Invoice invoice=invoiceDataBase.getInvoice(transportCompanyId, invoiceNumber);
+        return invoice;
+    }
+
     public void changeActivityToFalse(Invoice invoice){
         invoice.setActivity(false);
         invoiceDataBase.updateInvoice(invoice);

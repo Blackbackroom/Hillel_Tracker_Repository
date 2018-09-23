@@ -16,6 +16,7 @@ final static Logger logger=Logger.getLogger(Config.class);
             dbUrl=properties.getProperty("db_url");
             dbUser=properties.getProperty("db_user");
             dbPassword=properties.getProperty("db_password");
+            novaPoshtaURL=properties.getProperty("nova_poshta_url");
         }catch (IOException e){
             logger.error("Error in configurations: "+e);
         }
@@ -25,5 +26,6 @@ final static Logger logger=Logger.getLogger(Config.class);
     public static String dbUrl;
     public static String dbUser;
     public static String dbPassword;
+    public static String novaPoshtaURL;
 
 }

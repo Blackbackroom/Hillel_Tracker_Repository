@@ -102,7 +102,7 @@ public class TranportCompanyDataBase implements TransportCompanyRepository {
                 while (resultSet.next()){
                     Invoice invoice=new Invoice();
                     invoice.setTransportCompanyId(resultSet.getInt("tc_id"));
-                    invoice.setNumber(resultSet.getLong("invoice_number"));
+                    invoice.setNumber(resultSet.getString("invoice_number"));
                     invoice.setActivity(resultSet.getBoolean("invoice_activity"));
                     invoice.setStatus(resultSet.getString("invoice_status"));
                     invoices.add(invoice);

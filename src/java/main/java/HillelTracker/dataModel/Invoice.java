@@ -3,18 +3,18 @@ package main.java.HillelTracker.dataModel;
 public class Invoice {
 
     // Data
-    private long Number;
+    private String Number;
     private boolean Activity;
     private String status;
     private int transportCompanyId;
 
     // Setters and Getters
 
-    public long getNumber() {
+    public String getNumber() {
         return Number;
     }
 
-    public void setNumber(long number) {
+    public void setNumber(String number) {
         Number = number;
     }
 

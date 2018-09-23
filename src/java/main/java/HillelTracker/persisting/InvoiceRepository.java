@@ -7,6 +7,6 @@ public interface InvoiceRepository {
     void addInvoice(Invoice invoice);
     void updateInvoice(Invoice invoice);
     void deleteInvoice(Invoice invoice);
-    Invoice getInvoice(int transportCompanyId, int invoiceNumber);
+    Invoice getInvoice(int transportCompanyId, String invoiceNumber);
     void deleteAllInvoicesOfTransportCompany(TransportCompany transportCompany);
 }

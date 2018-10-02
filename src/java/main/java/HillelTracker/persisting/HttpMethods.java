@@ -2,8 +2,7 @@ package main.java.HillelTracker.persisting;
 
 
 import main.java.HillelTracker.dataModel.Invoice;
-import main.java.HillelTracker.dataModel.TransportCompany;
-import org.apache.http.HttpConnection;
+import main.java.HillelTracker.persisting.utils.HttpConnector;
 import org.apache.log4j.Logger;
 
 import java.io.*;

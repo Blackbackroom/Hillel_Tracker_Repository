@@ -1,21 +1,18 @@
-package main.java.HillelTracker.persisting;
-
+package main3.persisting.util;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static main.java.HillelTracker.configuration.Config.dbUrl;
-import static main.java.HillelTracker.configuration.Config.dbUser;
-import static main.java.HillelTracker.configuration.Config.dbPassword;
-import static main.java.HillelTracker.configuration.Config.user;
-import static main.java.HillelTracker.configuration.Config.dbUrl;
+import static main3.configuration.Config.dbPassword;
+import static main3.configuration.Config.dbUser;
+import static main3.configuration.Config.dbUrl;
 
 public class MySQLConnector {
     final static Logger logger=Logger.getLogger(MySQLConnector.class);
 
-    public  MySQLConnector(){
+    public MySQLConnector(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
         }catch (ClassNotFoundException e){
@@ -31,4 +28,5 @@ public class MySQLConnector {
             logger.error("Error in connection: "+e);
         }return connection;
     }
+
 }

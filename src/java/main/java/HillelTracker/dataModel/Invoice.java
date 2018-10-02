@@ -3,27 +3,36 @@ package main.java.HillelTracker.dataModel;
 public class Invoice {
 
     // Data
-    private String Number;
-    private boolean Activity;
+    private String number;
+    private boolean activity;
     private String status;
-    private int transportCompanyId;
+
+    public Invoice(String number, boolean activity){
+        this.number=number;
+        this.activity=activity;
+    }
+
+    public Invoice(String number){
+        this.number=number;
+        activity=true;
+    }
 
     // Setters and Getters
 
     public String getNumber() {
-        return Number;
+        return number;
     }
 
     public void setNumber(String number) {
-        Number = number;
+        number = number;
     }
 
     public boolean getActivity() {
-        return Activity;
+        return activity;
     }
 
     public void setActivity(boolean activity) {
-        Activity = activity;
+        activity = activity;
     }
 
     public String getStatus() {
@@ -34,11 +43,4 @@ public class Invoice {
         this.status = status;
     }
 
-    public int getTransportCompanyId() {
-        return transportCompanyId;
     }
-
-    public void setTransportCompanyId(int transportCompanyId) {
-        this.transportCompanyId = transportCompanyId;
-    }
-}

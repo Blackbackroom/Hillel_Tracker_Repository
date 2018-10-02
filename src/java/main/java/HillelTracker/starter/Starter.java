@@ -11,13 +11,13 @@ import java.io.IOException;
 
 public class Starter {
     public static void main(String[] args) throws IOException {
-    Invoice invoice=new Invoice();
-    invoice.setNumber("59998068606256");
-
-    InvoiceService invoiceService=new InvoiceService();
-    invoiceService.getStatusFromServer(invoice);
-
-        System.out.println(invoice.getStatus());
+//    Invoice invoice=new Invoice();
+//    invoice.setNumber("59998068606256");
+//
+//    InvoiceService invoiceService=new InvoiceService();
+//    invoiceService.getStatusFromServer(invoice);
+//
+//        System.out.println(invoice.getStatus());
 
     }
 }

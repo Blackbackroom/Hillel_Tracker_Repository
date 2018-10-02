@@ -1,6 +1,5 @@
-package main.java.HillelTracker.persisting;
+package main.java.HillelTracker.persisting.utils;
 
-import main.java.HillelTracker.dataModel.TransportCompany;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;

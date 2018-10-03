@@ -1,11 +1,13 @@
 package main3.persisting;
 
 import main3.model.Invoice;
+import main3.model.TC;
+import java.util.List;
 
 public interface RepositoryInvoice {
-    void add (Invoice invoice);
+    void add (TC tc, String number);
     Invoice get (int tcId, String number);
     void delete (int tcId, String number);
     void update (Invoice invoice);
-    void changeTc (Invoice invoice, int tcId);
+    List<Invoice> getAvailable();
 }

@@ -1,6 +1,7 @@
 package main3.persisting;
 
 import main3.model.Invoice;
+import main3.model.TC;
 import main3.persisting.util.MySQLConnector;
 import org.apache.log4j.Logger;
 
@@ -8,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RepositoryInvoiceImpl implements RepositoryInvoice {
 MySQLConnector mySQLConnector=new MySQLConnector();
@@ -15,7 +18,9 @@ final static Logger logger=Logger.getLogger(RepositoryInvoiceImpl.class);
 
 
     @Override
-    public void add(Invoice invoice) {
+    public void add(TC tc, String number) {
+        Invoice invoice = new Invoice(number);
+        invoice.setTcId(tc.getId());
         try (Connection connection=mySQLConnector.getConnection();
              PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO `invoices` (tc_id, number, available, status) VALUES(?,?,?,?)")){
                 preparedStatement.setInt(1, invoice.getTcId());
@@ -31,7 +36,7 @@ final static Logger logger=Logger.getLogger(RepositoryInvoiceImpl.class);
 
     @Override
     public Invoice get(int tcId, String number) {
-        Invoice invoice = new Invoice (number);
+        Invoice invoice = null;
 
         try (Connection connection=mySQLConnector.getConnection();
              PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM `invoices` WHERE tc_id=? AND number=?")){
@@ -39,10 +44,15 @@ final static Logger logger=Logger.getLogger(RepositoryInvoiceImpl.class);
                 preparedStatement.setString(2, number);
             try(ResultSet resultSet=preparedStatement.executeQuery()){
                 while(resultSet.next()){
-                    invoice.setTcId(resultSet.getInt("tc_id"));
-                    invoice.setNumber(resultSet.getString("number"));
-                    invoice.setAvailable(resultSet.getBoolean("available"));
-                    invoice.setStatus(resultSet.getString("status"));
+                    if(resultSet.getString("number")!=null) {
+                        invoice = new Invoice(resultSet.getString("number"));
+                        invoice.setTcId(resultSet.getInt("tc_id"));
+                        invoice.setAvailable(resultSet.getBoolean("available"));
+                        invoice.setStatus(resultSet.getString("status"));
+                    }
+                    else {
+                        invoice=null;
+                    }
                 }
             }
         }catch (SQLException e){
@@ -68,7 +78,7 @@ final static Logger logger=Logger.getLogger(RepositoryInvoiceImpl.class);
     @Override
     public void update(Invoice invoice) {
         try (Connection connection=mySQLConnector.getConnection();
-             PreparedStatement preparedStatement=connection.prepareStatement("UPDATE `invoices` SET available=?, status=? WHERE tc_id=?, number=?")){
+             PreparedStatement preparedStatement=connection.prepareStatement("UPDATE `invoices` SET available=?, status=? WHERE tc_id=? AND number=?")){
                 preparedStatement.setBoolean(1, invoice.getAvailable());
                 preparedStatement.setString(2, invoice.getStatus());
                 preparedStatement.setInt(3, invoice.getTcId());
@@ -77,19 +87,30 @@ final static Logger logger=Logger.getLogger(RepositoryInvoiceImpl.class);
         }catch (SQLException e){
             logger.error("Update invoice throws exception: "+e);
         }
-
     }
 
     @Override
-    public void changeTc(Invoice invoice, int tcId) {
-        try (Connection connection=mySQLConnector.getConnection();
-             PreparedStatement preparedStatement=connection.prepareStatement("UPDATE `invoices` SET tc_id=? WHERE tc_id=?, number=?")){
-            preparedStatement.setInt(1, tcId);
-            preparedStatement.setInt(2, invoice.getTcId());
-            preparedStatement.setString(3, invoice.getNumber());
-            preparedStatement.executeUpdate();
+    public List<Invoice> getAvailable() {
+        List<Invoice> invoices=new ArrayList<>();
+
+        try(Connection connection=mySQLConnector.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM `invoices` WHERE available=?")){
+            preparedStatement.setBoolean(1, true);
+                try(ResultSet resultSet=preparedStatement.executeQuery()){
+                    while (resultSet.next()){
+                        Invoice invoice=new Invoice(resultSet.getString("number"));
+                        invoice.setTcId(resultSet.getInt("tc_id"));
+                        invoice.setAvailable(resultSet.getBoolean("available"));
+                        invoice.setStatus(resultSet.getString("status"));
+                        invoices.add(invoice);
+                    }
+            }
         }catch (SQLException e){
-            logger.error("Update invoice throws exception: "+e);
+            logger.error("Get available invoices throws exception "+e);
         }
+
+        return invoices;
     }
+
+
 }

@@ -16,6 +16,7 @@ public class NovaPoshta extends TC implements Checkable{
     public NovaPoshta() {
         super.id=novaPoshtaId;
         super.url=novaPoshtaUrl;
+        super.name="NovaPoshata";
     }
 
     private static String createRequest(String number){
@@ -142,7 +143,7 @@ public class NovaPoshta extends TC implements Checkable{
                 status = "Нараховується плата за зберігання";
                 break;
             default:
-                status = "Помилка статусу";
+                status = null;
                 break;
         }
 

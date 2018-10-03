@@ -1,9 +1,12 @@
 package main3;
 
 import main3.service.ServiceInvoice;
+import org.apache.log4j.Logger;
 
 public class Runner {
+    final static Logger logger=Logger.getLogger(Runner.class);
     public static void main(String[] args) {
+
         ServiceInvoice serviceInvoice=new ServiceInvoice();
 
 
@@ -12,9 +15,8 @@ public class Runner {
 
         serviceInvoice.checkAvailableInvoices();
 
-        System.out.println(serviceInvoice.getInvoice(serviceInvoice.getNovaPoshta(),"59998069085966").getStatus());
-        System.out.println(serviceInvoice.getInvoice(serviceInvoice.getNovaPoshta(),"59998069159924").getStatus());
-
+        logger.info(serviceInvoice.getInvoice(serviceInvoice.getNovaPoshta(),"59998069085966").getStatus());
+        logger.info(serviceInvoice.getInvoice(serviceInvoice.getNovaPoshta(),"59998069159924").getStatus());
 
 //        serviceInvoice.removeInvoice(serviceInvoice.getNovaPoshta(),"59998069085966");
 //        serviceInvoice.removeInvoice(serviceInvoice.getNovaPoshta(),"59998069159924");

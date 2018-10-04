@@ -13,6 +13,9 @@ public class Runner {
         serviceInvoice.addInvoice(serviceInvoice.getNovaPoshta(),"59998069085966");
         serviceInvoice.addInvoice(serviceInvoice.getNovaPoshta(),"59998069159924");
 
+//        serviceInvoice.removeInvoice(serviceInvoice.getNovaPoshta(),"59998069085966");
+//        serviceInvoice.removeInvoice(serviceInvoice.getNovaPoshta(), "59998069159924");
+
         serviceInvoice.checkAvailableInvoices();
 
         logger.info(serviceInvoice.getInvoice(serviceInvoice.getNovaPoshta(),"59998069085966").getStatus());

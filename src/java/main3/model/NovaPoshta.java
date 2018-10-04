@@ -49,7 +49,7 @@ public class NovaPoshta extends TC implements Checkable{
             connection.setRequestProperty("Content-Type", "string");
             connection.setDoOutput(true);
             connection.setDoInput(true);
-            connection.setRequestMethod("GET");
+            connection.setRequestMethod("POST");
             connection.connect();
             OutputStreamWriter wr = new OutputStreamWriter(connection.getOutputStream());
             wr.write(createRequest(number));

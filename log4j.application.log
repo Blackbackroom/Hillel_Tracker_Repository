@@ -1,0 +1,24 @@
+2018-10-03 20:59:50 INFO  ServiceInvoice:19 -Invoice number 59998069085966 in Transport company NovaPoshta already exists
+2018-10-03 20:59:50 INFO  ServiceInvoice:19 -Invoice number 59998069159924 in Transport company NovaPoshta already exists
+2018-10-03 20:59:53 INFO  Runner:18 -Відправлення отримано
+2018-10-03 20:59:53 INFO  Runner:19 -Відправлення у місті
+2018-10-03 21:07:39 INFO  ServiceInvoice:19 -Invoice number 59998069085966 in Transport company NovaPoshta already exists
+2018-10-03 21:07:39 INFO  ServiceInvoice:19 -Invoice number 59998069159924 in Transport company NovaPoshta already exists
+2018-10-03 21:07:42 INFO  Runner:18 -Відправлення отримано
+2018-10-03 21:07:42 INFO  Runner:19 -Відправлення у місті
+2018-10-04 18:32:57 INFO  ServiceInvoice:19 -Invoice number 59998069085966 in Transport company NovaPoshta already exists
+2018-10-04 18:32:57 INFO  ServiceInvoice:19 -Invoice number 59998069159924 in Transport company NovaPoshta already exists
+2018-10-04 18:33:01 INFO  Runner:18 -Відправлення отримано
+2018-10-04 18:33:01 INFO  Runner:19 -Відправлення у місті
+2018-10-04 18:34:35 INFO  ServiceInvoice:29 -Invoice number 59998069085966 in Transport company NovaPoshta removed
+2018-10-04 18:34:35 INFO  ServiceInvoice:29 -Invoice number 59998069159924 in Transport company NovaPoshta removed
+2018-10-04 18:37:58 INFO  ServiceInvoice:26 -Invoice number 59998069085966 in Transport company NovaPoshta doesn't exist
+2018-10-04 18:37:58 INFO  ServiceInvoice:26 -Invoice number 59998069159924 in Transport company NovaPoshta doesn't exist
+2018-10-04 18:43:24 INFO  ServiceInvoice:17 -Invoice number 59998069085966 in Transport company NovaPoshta added
+2018-10-04 18:43:24 INFO  ServiceInvoice:17 -Invoice number 59998069159924 in Transport company NovaPoshta added
+2018-10-04 18:43:28 INFO  Runner:21 -Відправлення отримано
+2018-10-04 18:43:28 INFO  Runner:22 -Відправлення у місті
+2018-10-05 10:01:52 INFO  ServiceInvoice:19 -Invoice number 59998069085966 in Transport company NovaPoshta already exists
+2018-10-05 10:01:52 INFO  ServiceInvoice:19 -Invoice number 59998069159924 in Transport company NovaPoshta already exists
+2018-10-05 10:01:57 INFO  Runner:21 -Відправлення отримано
+2018-10-05 10:01:57 INFO  Runner:22 -Відправлення прямує до міста
